@@ -1,41 +1,39 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
+
+function dateFormat(date) {
+  const options = { month: 'long', day: 'numeric', year: 'numeric' };
+  return new Intl.DateTimeFormat('en-US', options).format(date);
+}
 
 // Schema to create a course model
 const reactionSchema = new Schema(
   {
     // TO DO: Replace the below
-    courseName: {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      max_length: 280,
+    },
+    username: {
       type: String,
       required: true,
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
-    },
-    startDate: {
+    createdAt: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
+      get: createdAtVal => dateFormat(createdAtVal),
     },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    students: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
-    id: false,
   }
 );
 
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

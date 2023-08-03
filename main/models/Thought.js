@@ -1,4 +1,7 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
+
+
 
 function dateFormat(date) {
   const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -14,8 +17,8 @@ const thoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      minlength: 1,
-      maxlength: 280,
+      min_length: 1,
+      max_length: 280,
     },
     createdAt: {
       type: Date,
@@ -31,9 +34,17 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
     id: false,
   }
 );
 
-module.exports = thoughtSchema;
+thoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
+
+const Thought = model('thought', thoughtSchema);
+
+module.exports = Thought;
+
