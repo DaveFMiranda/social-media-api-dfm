@@ -2,7 +2,7 @@ const { Schema, Types, model } = require('mongoose');
 // DAVE SOMETHING MIGHT BE WRONG WITH THIS LINE
 const thoughtSchema = require('./Thought');
 
-// Schema to create Student model
+// Schema to create User model
 const userSchema = new Schema(
   {
     username: {
