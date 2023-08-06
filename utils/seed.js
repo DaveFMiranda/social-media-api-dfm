@@ -31,7 +31,7 @@ connection.once("open", async () => {
     const email = getRandomEmail();
     const thoughts = getRandomThoughts(3);
 
-    students.push({
+    users.push({
       username,
       email,
       thoughts,
