@@ -1,6 +1,6 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, Types, model } = require("mongoose");
 // DAVE SOMETHING MIGHT BE WRONG WITH THIS LINE
-const thoughtSchema = require('./Thought');
+const thoughtSchema = require("./Thought");
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -19,15 +19,18 @@ const userSchema = new Schema(
       validate: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
       max_length: 50,
     },
-    // TO DO: array of _id values referencing the Thought model
-    thoughts: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Thought'
-    }],
-    friends: [  {
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }],
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
@@ -36,10 +39,10 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.virtual('friendCount').get(function () {
+userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-const User = model('user', userSchema);
+const User = model("user", userSchema);
 
 module.exports = User;
