@@ -1,119 +1,65 @@
-const names = [
-    'Aaran',
-    'Aaren',
-    'Aarez',
-    'Aarman',
-    'Aaron',
-    'Aaron-James',
-    'Aarron',
-    'Aaryan',
-    'Aaryn',
-    'Aayan',
-    'Aazaan',
-    'Abaan',
-    'Abbas',
-    'Abdallah',
-    'Abdalroof',
-    'Abdihakim',
-    'Abdirahman',
-    'Abdisalam',
-    'Abdul',
-    'Abdul-Aziz',
-    'Abdulbasir',
-    'Abdulkadir',
-    'Abdulkarem',
-    'Smith',
-    'Jones',
-    'Coollastname',
-    'enter_name_here',
-    'Ze',
-    'Zechariah',
-    'Zeek',
-    'Zeeshan',
-    'Zeid',
-    'Zein',
-    'Zen',
-    'Zendel',
-    'Zenith',
-    'Zennon',
-    'Zeph',
-    'Zerah',
-    'Zhen',
-    'Zhi',
-    'Zhong',
-    'Zhuo',
-    'Zi',
-    'Zidane',
-    'Zijie',
-    'Zinedine',
-    'Zion',
-    'Zishan',
-    'Ziya',
-    'Ziyaan',
-    'Zohaib',
-    'Zohair',
-    'Zoubaeir',
-    'Zubair',
-    'Zubayr',
-    'Zuriel',
-    'Xander',
-    'Jared',
-    'Courtney',
-    'Gillian',
-    'Clark',
-    'Jared',
-    'Grace',
-    'Kelsey',
-    'Tamar',
-    'Alex',
-    'Mark',
-    'Tamar',
-    'Farish',
-    'Sarah',
-    'Nathaniel',
-    'Parker',
+const usernames = [
+    'coolkid182',
+    'davemira',
+    'joepiscopo',
+    'pepsico',
+    'charityfaith',
+    'hotguy6969',
+    'noobevad',
+    'noobsaibot',
+    'shaokahn',
+    'example10'
   ];
   
-  const appDescriptions = [
-    'Decision Tracker',
-    'Find My Phone',
-    'Learn Piano',
-    'Starbase Defender',
-    'Tower Defense',
-    'Monopoly Money Manager',
-    'Movie trailers',
-    'Hello world',
-    'Stupid Social Media App',
-    'Notes',
-    'Messages',
-    'Email',
-    'Compass',
-    'Firefox',
-    'Running app',
-    'Cooking app',
-    'Poker',
-    'Deliveries',
+const emails = [
+  '@mail.com',
+'@bluemail.com',
+'@zmail.com',
+'@geemail.com',
+'@ayohell.com'
+]
+
+  const thoughtsText = [
+    'Its Tuesday',
+    'Did you remember to bring your umbrella?',
+    'I got the rumblies in my tummy that only hands can satisfy',
+    'Deep Thoughts, by Jack Handy',
+    'I don\'t mind the sun sometimes',
+    'Images it brings',
+    'I can taste you on my lips and see you in my dreams',
+    'Cops, come and try to take my crops',
+    'These pigs wanna blow my house down',
+    'Underdround --> to the next town',
+    'Insane in the membrane',
+    'Insane in the Brain',
+    'I\'m insane, got no brain',
+    'Who you tryna get crazy with, ese?',
+    'Don\'t you know I\'m loco?',
+    'I think I\'m going crazy',
+    'Do you realize?',
+    'Jump around, jump around, jump up jump up and get down',
+    'House of Pain, got no brain',
   ];
   
-  // Get a random item given an array
   const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
   
-  // Gets a random full name
-  const getRandomName = () =>
-    `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+const getRandomName = () =>
+`${getRandomArrItem(usernames)}`;
+
+  const getRandomEmail = () =>
+    `${getRandomArrItem(usernames)}${getRandomArrItem(emails)}`;
   
   // Function to generate random assignments that we can add to student object.
-  const getRandomAssignments = (int) => {
+  const getRandomThoughts = (int) => {
     const results = [];
     for (let i = 0; i < int; i++) {
       results.push({
-        assignmentName: getRandomArrItem(appDescriptions),
-        score: Math.floor(Math.random() * (99 - 70 + 1) + 70),
+        thoughtText: getRandomArrItem(thoughtsText),
       });
     }
     return results;
   };
   
   // Export the functions for use in seed.js
-  module.exports = { getRandomName, getRandomAssignments };
+  module.exports = { getRandomName, getRandomEmail, getRandomThoughts };
   
