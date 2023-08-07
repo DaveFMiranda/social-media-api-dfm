@@ -10,7 +10,7 @@ const {
 const {
   createReaction,
   deleteReaction,
-} = require('../../controllers/reactionController.js');
+} = require("../../controllers/reactionController.js");
 
 // /api/thoughts
 router.route("/").get(getThoughts).post(createThought);
@@ -22,9 +22,10 @@ router
   .put(updateThought)
   .delete(deleteThought);
 
-router.route('/:thoughtId/reactions').post(createReaction);
+// /api/thoughts/:thoughtId/reactions
+router.route("/:thoughtId/reactions").post(createReaction);
 
-router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction);
-
+// /api/thoughts/:thoughtId/reactions/:reactionId
+router.route("/:thoughtId/reactions/:reactionId").delete(deleteReaction);
 
 module.exports = router;

@@ -20,8 +20,10 @@ connection.once("open", async () => {
     await connection.dropCollection("users");
   }
 
+  // create array to store Thoughts
   const thoughts = [];
 
+  // seed data for Thought text body
   const thoughtsText = [
     "Its Tuesday",
     "Did you remember to bring your umbrella?",
@@ -45,6 +47,7 @@ connection.once("open", async () => {
     // "Thought no. 20: rock n roll part 2, blur song 2",
   ];
 
+  // seed data for usernames in User model instances
   const usernames = [
     "coolkid182",
     "davemira",
@@ -58,20 +61,21 @@ connection.once("open", async () => {
     "example10",
   ];
 
+  // assigns text and users to Thoughts and creates an array of all seed Thoughts
   for (let i = 0; i < 10; i++) {
     const thoughtText = thoughtsText[i];
     const username = usernames[i];
 
     thoughts.push({
       thoughtText,
-      username
+      username,
     });
   }
 
+  // pushes Thoughts array to the DB
   await Thought.collection.insertMany(thoughts);
 
- 
-
+  // seed emais for Users
   const emails = [
     "coolkid182@zmail.com",
     "davemira@ayohell.com",
@@ -84,18 +88,16 @@ connection.once("open", async () => {
     "shaokahn@starfox.fox",
     "example10@example.to",
   ];
-  // Create empty array to hold the users
-  // DAVE YOU CAN PROBABLY DELETE THESE TWO LINES
+
+  // pulls IDs from newly-created Thoughts collection to populate Users with Thoughts
   const allThoughts = await Thought.find({});
   const thoughtIds = allThoughts.map((thought) => thought._id);
-  
-  
-  
+
+  // creates array in which to store Users
   const users = [];
 
-  // Loop 10 times -- add users to the users array
+  // adds user seed data to users array
   for (let i = 0; i < 10; i++) {
-    // Get some random assignment objects using a helper function that we imported from ./data
     const username = usernames[i];
     const email = emails[i];
     const thoughts = thoughtIds[i];
