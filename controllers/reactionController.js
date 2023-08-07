@@ -6,14 +6,19 @@ module.exports = {
 // post a new reaction
 async createReaction(req,res) {
   try {
-    const reaction = await Reaction.create(req.body);
-    res.json(reaction);
+    
 
-    const thought = await Thought.findOne({thoughtId: req.params.thoughtId});
+    const thought = await Thought.findOne({_id: req.params.thoughtId});
+    console.log(thought);
     if(thought) {
+      const reaction = {
+        reactionBody: req.body.reactionBody,
+        username: req.body.username,
+      }
+      console.log(reaction);
       thought.reactions.push(reaction);
       await thought.save();
-      res.status(200).send({message: 'Reaction added successfully', reaction: reaction});
+      res.status(200).send({message: 'Reaction added successfully'});
 
     } else {
       res.stats(404).send({message: 'Thought not found'});
@@ -28,11 +33,10 @@ async createReaction(req,res) {
 
 async deleteReaction(req, res) {
   try {
-    const reaction = await Reaction.findOneAndDelete({_id: req.params.reactionId});
-
-    if (!reaction) {
-      res.status(404).json({message: 'No reaction with this id!'});
-    }
+      const thought = await Thought.findOne({_id: req.params.thoughtId});
+    reaction = 
+      thought.reactions.pull(req.params.reactionId)
+await thought.save();
     res.json({message: "Reaction deleted!"});
 
   } catch (err) {
