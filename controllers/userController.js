@@ -7,6 +7,13 @@ module.exports = {
     try {
       const users = await User.find();
 
+      users.forEach(user => {
+        console.log(Array.isArray(user.thoughts));
+        user.thoughts.forEach(thought => {
+          console.log(typeof thought);
+        })
+      });
+
       const userObj = {
         users,
       };
@@ -22,17 +29,20 @@ module.exports = {
   async getSingleUser(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
+      // DAVE THERE'S A PROBLEM IN HERE SOMEWHERE
         .select("-__v")
         .populate("thoughts")
         .populate("friends");
-
       if (!user) {
         return res.status(404).json({ message: "No user with that ID" });
       }
+      console.log(Array.isArray(user.thoughts));
 
       res.json({
+        
         user,
       });
+
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);

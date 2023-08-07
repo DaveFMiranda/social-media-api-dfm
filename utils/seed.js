@@ -81,24 +81,28 @@ const emails = [
   'example10@example.to'
 ];
   // Create empty array to hold the users
+  const allThoughts = await Thought.find({});
+  const thoughtIds = allThoughts.map(thought => thought._id)
   const users = [];
 
-getThreeRandomThoughts = () => {
-for (let i = 0; i <20; i++) {
 
-}
 
-}
+
 
   // Loop 10 times -- add users to the users array
   for (let i = 0; i < 10; i++) {
     // Get some random assignment objects using a helper function that we imported from ./data
     const username = usernames[i];
     const email = emails[i];
+    const thoughts = thoughtIds[i];
+
+
+
 
     users.push({
       username,
       email,
+      thoughts: [thoughts],
     });
   }
 

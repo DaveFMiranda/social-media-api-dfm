@@ -49,19 +49,21 @@ async getSingleThought(req, res) {
 async createThought(req,res) {
   try {
     const thought = await Thought.create(req.body);
-    res.json(thought);
-
+    console.log(thought._id instanceof ObjectId);
     const user = await User.findOne({username: req.body.username});
     if(user) {
-      user.thoughts.push(thought._id)
-    ;
+      console.log(typeof user.thoughts);
 
+      user.thoughts.push(new ObjectId(thought._id));
     await user.save();
- res.status(200).send({ message: "Thought added successfully", thought: thought });
+
+
+ res.status(200).send({ message: "Thought added successfully", }); //thought: thought });
     } else {
       res.status(404).send({ message: "User not found" });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 
@@ -97,6 +99,13 @@ async deleteThought(req, res) {
     if (!thought) {
       res.status(404).json({message: 'No thought with this id!'});
     }
+
+    const user = await User.findOne({ thoughts: req.params.thoughtId });
+      if(user) {
+        user.thoughts.pull(req.params.thoughtId);  // pull is a method provided by Mongoose to remove the item from the array
+        await user.save();
+      }
+
     res.json({message: "Thought deleted!"});
 
   } catch (err) {

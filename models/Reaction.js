@@ -5,14 +5,11 @@ function dateFormat(date) {
   return new Intl.DateTimeFormat('en-US', options).format(date);
 }
 
-// Schema to create a course model
+// Schema to create a reaction model
 const reactionSchema = new Schema(
   {
     // TO DO: Replace the below
-    reactionId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
+    
     reactionBody: {
       type: String,
       required: true,
