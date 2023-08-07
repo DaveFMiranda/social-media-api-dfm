@@ -1,11 +1,13 @@
 const { Schema, Types, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
 
+// formats date into readable format
 function dateFormat(date) {
   const options = { month: "long", day: "numeric", year: "numeric" };
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
+// creates schema for Thoughts
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -33,6 +35,7 @@ const thoughtSchema = new Schema(
   }
 );
 
+// virtual to count a thought's reactions
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });

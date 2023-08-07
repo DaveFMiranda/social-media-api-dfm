@@ -1,15 +1,14 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, Types } = require("mongoose");
 
+// format date into readable format
 function dateFormat(date) {
-  const options = { month: 'long', day: 'numeric', year: 'numeric' };
-  return new Intl.DateTimeFormat('en-US', options).format(date);
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
 }
 
-// Schema to create a reaction model
+// Schema to create a reaction
 const reactionSchema = new Schema(
   {
-    // TO DO: Replace the below
-    
     reactionBody: {
       type: String,
       required: true,
@@ -22,7 +21,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal),
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
   },
   {
